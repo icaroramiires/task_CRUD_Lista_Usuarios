@@ -1,0 +1,26 @@
+{
+  "name": "task",
+  "description": "",
+  "main": "app.js",
+  "authors": [
+    "icaroramiires"
+  ],
+  "license": "GPL-3.0",
+  "keywords": [
+    "angularjs",
+    "javascript",
+    "bootstrap"
+  ],
+  "homepage": "https://github.com/icaroramiires/task_CRUD_Lista_Usuarios",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "app/lib",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.5.8"
+  }
+}

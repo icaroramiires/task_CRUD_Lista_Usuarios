@@ -1,0 +1,27 @@
+{
+  "name": "task",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/icaroramiires/task_CRUD_Lista_Usuarios.git"
+  },
+  "keywords": [
+    "angularjs",
+    "javascript",
+    "bootstrap"
+  ],
+  "author": "icaroramiires",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/icaroramiires/task_CRUD_Lista_Usuarios/issues"
+  },
+  "homepage": "https://github.com/icaroramiires/task_CRUD_Lista_Usuarios#readme",
+  "devDependencies": {
+    "bower": "^1.7.9"
+  }
+}
