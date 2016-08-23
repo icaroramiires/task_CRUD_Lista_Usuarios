@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="./lib/bootstrap/dist/css/bootstrap.min.css" media="screen" title="no title" charset="utf-8">
 </head>
 
-<body>
+<body data-ng-controller="UsuarioController as Usuario">
     <!-- Modal Cadastra -->
     <div class="modal fade" id="modalCadastro" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
@@ -22,36 +22,32 @@
                     <form>
                         <div class="row">
                             <div class="radio col-md-10 col-md-offset-1">
-                                    inportar dados de um funcionário cadastrado:
+                                inportar dados de um funcionário cadastrado:
                                 <label class="radio-inline">
-                                    <input type="radio" name="importarDados" id="radio-btn-nao" value="option1"> Não
+                                    <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1"> Não
                                 </label>
                                 <label class="radio-inline">
-                                    <input type="radio" name="inportarDados" id="radio-btn-nao" value="option2"> Sim
+                                    <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"> Sim
                                 </label>
                             </div>
                             <div class="form-group">
                                 <label class="text-center col-md-10 col-md-offset-1">Nome Completo</label>
-                                <input class="col-md-10 col-md-offset-1" type="text" name="nome" value="">
+                                <input class="col-md-10 col-md-offset-1" type="text" name="nome" data-ng-model="Usuario.form.nome">
                                 <label class="text-center col-md-10 col-md-offset-1">Email</label>
-                                <input class="col-md-10 col-md-offset-1" type="email" name="email" value="">
+                                <input class="col-md-10 col-md-offset-1" type="email" name="email" data-ng-model="Usuario.form.email">
 
                                 <div class="col-md-6">
                                     <label class=" text-center col-md-10 col-md-offset-1">Data</label>
-                                    <input class="col-md-8 col-md-offset-2" type="date" placeholder="dd/mm/aaaa" name="data" value="">
+                                    <input class="col-md-8 col-md-offset-2" type="date" placeholder="dd/mm/aaaa" name="data" data-ng-model="Usuario.form.dataRegistro">
                                 </div>
                                 <div class="col-md-6">
                                     <label class="text-center col-md-10 col-md-offset-1">Celular</label>
-                                    <input class="col-md-8 col-md-offset-2" type="tel" placeholder="(00) 00000-0000" name="celular" value="">
+                                    <input class="col-md-8 col-md-offset-2" type="tel" placeholder="(00) 00000-0000" name="celular" data-ng-model="Usuario.form.telefone">
                                 </div>
                                 <div class="col-md-4">
                                     <label class="text-center col-md-10 col-md-offset-2">Perfil de Acesso</label>
-                                    <select class="form-control col-md-10 col-md-offset-3">
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
-                                        <option>5</option>
+                                    <select data-ng-model="Usuario.form.perfil" data-ng-options="perfil for perfil in Usuario.perfis" class="form-control col-md-10 col-md-offset-3">
+                                        <!-- ng-options -->
                                     </select>
                                 </div>
                             </div>
@@ -60,7 +56,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn pull-left btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove-circle"></span> Cancelar</button>
-                    <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-disk"></span> Salvar</button>
+                    <button type="button" data-ng-click="Usuario.cadastrar(Usuario.form)" data-dismiss="modal" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-disk"></span> Salvar</button>
                 </div>
             </div>
         </div>
@@ -142,7 +138,7 @@
                 <div class="row">
                     <div class="col-md-6 col-md-offset-3 text-center">
                         <h3>Consulta Rápida</h3>
-                        <input class="col-md-8 col-md-offset-2" type="text">
+                        <input class="col-md-8 col-md-offset-2" type="text" data-ng-model="buscarUsuario">
                         <button type="button" class="btn col-md-6 col-md-offset-3 btn-primary navbar-btn"><span class="glyphicon glyphicon-search"></span> Pesquisar</button>
                     </div>
                 </div>
@@ -164,17 +160,16 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <th>Data do Cadastro</th>
-                                <th>Nome Completo</th>
-                                <th>E-mail</th>
-                                <th>Perfil</th>
-                                <th>Status</th>
-                                <th>Contato</th>
+                            <tr data-ng-repeat="usuario in Usuario.usuarios | filter:buscarUsuario">
+                                <th>{{ usuario.dataRegistro }}</th>
+                                <th>{{ usuario.nome }}</th>
+                                <th>{{ usuario.email }}</th>
+                                <th>{{ usuario.perfil }}</th>
+                                <th>{{ usuario.status }}</th>
+                                <th>{{ usuario.telefone }}</th>
                                 <th>
                                     <button type="button" class="btn   btn-default navbar-btn" data-toggle="modal" data-target="#modalEditarDados"><span class="glyphicon glyphicon-pencil"></span></button>
                                     <button type="button" class="btn   btn-danger navbar-btn" data-toggle="modal" data-target="#modalCadastro"><span class="glyphicon glyphicon-remove"></span></button>
-
                                 </th>
                             </tr>
                         </tbody>
@@ -206,7 +201,8 @@
     <script src="./lib/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="./lib/angular/angular.min.js"></script>
 
-    <script src="app.js"></script>
+    <script type="text/javascript" src="app.js"></script>
+    <script type="text/javascript" src="controllers/usuario.controller.js"></script>
 </body>
 
 </html>

@@ -1,34 +1,33 @@
-(function() {
-    'user strict';
-    angular
-        .module('app')
-        .controller('UsuarioController', UsuarioController);
+angular
+    .module('app')
+    .controller('UsuarioController', UsuarioController);
 
-    let UsuarioController = function() {
+    function UsuarioController() {
         let vm = this;
+        vm.perfis = ["Administrador", "Padrão"];
+
         vm.usuarios = [{
-            dataCadastro: Date.now(),
+            dataRegistro: "22/08/2016",
             nome: "Leurimar da Silva Lins",
             email: "leurimar.lins@gmail.com",
             perfil: "Administrador",
             status: "Ativo",
-            celular: "(83) 98827-2291"
+            telefone: "(83) 98827-2291"
         }];
 
-        vm.cadastrar = function(usuario){
+        vm.cadastrar = cadastrar;
+        vm.listar = listar;
+        vm.reset = reset;
+
+        function cadastrar(usuario) {
             vm.usuarios.push(usuario);
         };
 
-        vm.listar = function() {
+        function listar() {
             return vm.usuarios;
-        }
+        };
 
-        vm.atualizar = function(id, usuario) {
-            vm.usuarios.update(id, usuario);
-        }
+        function reset() {
 
-        vm.remove = function() {
-            vm.usuarios.remove(id, usuario);
         }
-    }
-})()
+    };
