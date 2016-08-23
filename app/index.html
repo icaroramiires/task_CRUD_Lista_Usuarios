@@ -109,7 +109,7 @@
                                 <th>{{ usuario.telefone }}</th>
                                 <th>
                                     <button type="button" class="btn   btn-default navbar-btn" data-toggle="modal" data-target="#modalUsuario"><span class="glyphicon glyphicon-pencil"></span></button>
-                                    <button type="button" class="btn   btn-danger navbar-btn" data-toggle="modal"  data-target="#modalDelete" ><span class="glyphicon glyphicon-remove"></span></button>
+                                    <button data-ng-click="Usuario.deletar(Usuario.usuario)" type="button" class="btn   btn-danger navbar-btn" data-toggle="modal"  data-target="#modalDelete" ><span class="glyphicon glyphicon-remove"></span></button>
                                 </th>
                             </tr>
                         </tbody>

@@ -49,7 +49,8 @@ angular
             return vm.usuarios;
         };
 
-        function deletar(index) {
+        function deletar(usuario) {
+            let index = vm.usuarios.indexOf(usuario);
             vm.usuarios.splice(index, 1);
         };
     };
