@@ -10,8 +10,7 @@
 </head>
 
 <body data-ng-controller="UsuarioController as Usuario">
-    <!-- Modal Cadastra -->
-    <div class="modal fade" id="modalCadastro" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal fade" id="modalUsuario" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -19,34 +18,39 @@
                     <h4 class="modal-title" id="">Novo Usuário</h4>
                 </div>
                 <div class="modal-body">
-                    <form>
+                    <form name="formCadastro">
                         <div class="row">
                             <div class="radio col-md-10 col-md-offset-1">
                                 inportar dados de um funcionário cadastrado:
                                 <label class="radio-inline">
-                                    <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1"> Não
+                                    <input type="radio" name="opcao" data-ng-required="required" id="inlineRadio1" value="nao" data-ng-model="opcao"> Não
                                 </label>
                                 <label class="radio-inline">
-                                    <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"> Sim
+                                    <input type="radio" name="opcao" data-ng-required="required" id="inlineRadio2" value="sim" data-ng-model="opcao"> Sim
                                 </label>
                             </div>
                             <div class="form-group">
+                                <div data-ng-show="opcao == 'sim'">
+                                    <label class="text-center col-md-10 col-md-offset-1">Selecione Funcionário</label>
+                                    <select data-ng-model="Usuario.usuario" data-ng-options="usuario.nome for usuario in Usuario.usuarios" class="col-md-10 col-md-offset-1">
+                                    </select>
+                                </div>
                                 <label class="text-center col-md-10 col-md-offset-1">Nome Completo</label>
-                                <input class="col-md-10 col-md-offset-1" type="text" name="nome" data-ng-model="Usuario.form.nome">
+                                <input class="col-md-10 col-md-offset-1" data-ng-required="required" type="text" data-ng-value="Usuario.usuario.nome" data-ng-model="Usuario.usuario.nome">
                                 <label class="text-center col-md-10 col-md-offset-1">Email</label>
-                                <input class="col-md-10 col-md-offset-1" type="email" name="email" data-ng-model="Usuario.form.email">
+                                <input class="col-md-10 col-md-offset-1" data-ng-required="required" type="email" name="email" data-ng-value="Usuario.usuario.email" data-ng-model="Usuario.usuario.email">
 
                                 <div class="col-md-6">
                                     <label class=" text-center col-md-10 col-md-offset-1">Data</label>
-                                    <input class="col-md-8 col-md-offset-2" type="date" placeholder="dd/mm/aaaa" name="data" data-ng-model="Usuario.form.dataRegistro">
+                                    <input class="col-md-8 col-md-offset-2" data-ng-required="required" type="date" placeholder="dd/mm/aaaa" data-ng-value="Usuario.usuario.dataRegistro" name="data" data-ng-model="Usuario.usuario.dataRegistro">
                                 </div>
                                 <div class="col-md-6">
                                     <label class="text-center col-md-10 col-md-offset-1">Celular</label>
-                                    <input class="col-md-8 col-md-offset-2" type="tel" placeholder="(00) 00000-0000" name="celular" data-ng-model="Usuario.form.telefone">
+                                    <input class="col-md-8 col-md-offset-2" data-ng-required="required" type="tel" placeholder="(00) 00000-0000" name="celular" data-ng-value="Usuario.usuario.telefone" data-ng-model="Usuario.usuario.telefone">
                                 </div>
                                 <div class="col-md-4">
                                     <label class="text-center col-md-10 col-md-offset-2">Perfil de Acesso</label>
-                                    <select data-ng-model="Usuario.form.perfil" data-ng-options="perfil for perfil in Usuario.perfis" class="form-control col-md-10 col-md-offset-3">
+                                    <select data-ng-value="Usuario.usuario.perfil" data-ng-required="required" data-ng-model="Usuario.usuario.perfil" data-ng-options="perfil for perfil in Usuario.perfis" class="form-control col-md-10 col-md-offset-3">
                                         <!-- ng-options -->
                                     </select>
                                 </div>
@@ -56,78 +60,14 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn pull-left btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove-circle"></span> Cancelar</button>
-                    <button type="button" data-ng-click="Usuario.cadastrar(Usuario.form)" data-dismiss="modal" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-disk"></span> Salvar</button>
+                    <button type="button" data-ng-click="Usuario.save(Usuario.usuario)" data-dismiss="modal" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-disk"></span> Salvar</button>
                 </div>
             </div>
         </div>
     </div>
-    <!-- Modal Edita-->
-    <div class="modal fade" id="modalEditarDados" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="">Novo Usuário</h4>
-                </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="row">
-                            <div class="col-md-10 col-md-offset-1">
-                                inportar dados de um funcionário cadastrado:
-                                <label class="radio-inline">
-                                    <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1"> Não
-                                </label>
-                                <label class="radio-inline">
-                                    <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"> Sim
-                                </label>
-                            </div>
-                            <div class="form-group">
-                                <label class="text-center col-md-10 col-md-offset-1">Selecione Funcionário</label>
-                                <select class="col-md-10 col-md-offset-1">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                </select>
-                                <label class="text-center col-md-10 col-md-offset-1">Nome Completo</label>
-                                <input class="col-md-10 col-md-offset-1" type="text" name="nome" value="">
-                                <label class="text-center col-md-10 col-md-offset-1">Email</label>
-                                <input class="col-md-10 col-md-offset-1" type="email" name="email" value="">
-
-                                <div class="col-md-6">
-                                    <label class=" text-center col-md-10 col-md-offset-1">Data</label>
-                                    <input class="col-md-8 col-md-offset-2" type="date" placeholder="dd/mm/aaaa" name="data" value="">
-                                </div>
-                                <div class="col-md-6">
-                                    <label class="text-center col-md-10 col-md-offset-1">Celular</label>
-                                    <input class="col-md-8 col-md-offset-2" type="tel" placeholder="(00) 00000-0000" name="celular" value="">
-                                </div>
-                                <div class="col-md-4">
-                                    <label class="text-center col-md-10 col-md-offset-2">Perfil de Acesso</label>
-                                    <select class="form-control col-md-10 col-md-offset-3">
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
-                                        <option>5</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn pull-left btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove-circle"></span> Cancelar</button>
-                    <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-disk"></span> Salvar</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <header>
         <nav class="navbar navbar-default navbar-fixed-top">
             <div class="container">
-                <button type="button" class="btn pull-right btn-primary navbar-btn" data-toggle="modal" data-target="#modalCadastro"><span class="glyphicon glyphicon-plus"></span> Cadastrar Novo Usuário</button>
+                <button type="button" class="btn pull-right btn-primary navbar-btn" data-toggle="modal" data-target="#modalUsuario"><span class="glyphicon glyphicon-plus"></span> Cadastrar Novo Usuário</button>
             </div>
         </nav>
     </header>
@@ -160,16 +100,16 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr data-ng-repeat="usuario in Usuario.usuarios | filter:buscarUsuario">
-                                <th>{{ usuario.dataRegistro }}</th>
+                            <tr data-ng-repeat="usuario in Usuario.usuarios | filter: buscarUsuario | limitTo: 5 track by $index">
+                                <th>{{ usuario.dataRegistro | date:'dd/MM/yyyy' }}</th>
                                 <th>{{ usuario.nome }}</th>
                                 <th>{{ usuario.email }}</th>
                                 <th>{{ usuario.perfil }}</th>
                                 <th>{{ usuario.status }}</th>
                                 <th>{{ usuario.telefone }}</th>
                                 <th>
-                                    <button type="button" class="btn   btn-default navbar-btn" data-toggle="modal" data-target="#modalEditarDados"><span class="glyphicon glyphicon-pencil"></span></button>
-                                    <button type="button" class="btn   btn-danger navbar-btn" data-toggle="modal" data-target="#modalCadastro"><span class="glyphicon glyphicon-remove"></span></button>
+                                    <button type="button" class="btn   btn-default navbar-btn" data-toggle="modal" data-target="#modalUsuario"><span class="glyphicon glyphicon-pencil"></span></button>
+                                    <button type="button" class="btn   btn-danger navbar-btn" data-toggle="modal"  data-target="#modalDelete" ><span class="glyphicon glyphicon-remove"></span></button>
                                 </th>
                             </tr>
                         </tbody>
