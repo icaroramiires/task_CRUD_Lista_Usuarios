@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>SysAutos</title>
     <link rel="stylesheet" href="./lib/bootstrap/dist/css/bootstrap.min.css" media="screen" title="no title" charset="utf-8">
+    <link rel="stylesheet" href="./lib/angular-toastr/dist/angular-toastr.min.css" media="screen" title="no title" charset="utf-8">
 </head>
 
 <body data-ng-controller="UsuarioController as Usuario">
@@ -65,13 +66,25 @@
             </div>
         </div>
     </div>
-        <nav class="navbar navbar-default navbar-fixed-top">
-            <div class="container">
-                <button type="button" class="btn pull-right btn-primary navbar-btn" data-toggle="modal" data-target="#modalUsuario"><span class="glyphicon glyphicon-plus"></span> Cadastrar Novo Usuário</button>
-            </div>
-        </nav>
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <button type="button" class="btn pull-right btn-primary navbar-btn" data-toggle="modal" data-target="#modalUsuario"><span class="glyphicon glyphicon-plus"></span> Cadastrar Novo Usuário</button>
+        </div>
+    </nav>
     </header>
-
+    <div class="modal fade bs-example-modal-sm" tabindex="-1" id="modalDelete" role="dialog" aria-labelledby="mySmallModalLabel">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <p>Deseja remover este usuário?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                    <button data-ng-click="Usuario.deletar(Usuario.usuario)" data-dismiss="modal" type="button" class="btn btn-primary">Sim</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <section>
         <div class="jumbotron">
             <div class="container">
@@ -109,7 +122,7 @@
                                 <th>{{ usuario.telefone }}</th>
                                 <th>
                                     <button type="button" class="btn   btn-default navbar-btn" data-toggle="modal" data-target="#modalUsuario"><span class="glyphicon glyphicon-pencil"></span></button>
-                                    <button data-ng-click="Usuario.deletar(Usuario.usuario)" type="button" class="btn   btn-danger navbar-btn" data-toggle="modal"  data-target="#modalDelete" ><span class="glyphicon glyphicon-remove"></span></button>
+                                    <button type="button" class="btn   btn-danger navbar-btn" data-toggle="modal" data-target="#modalDelete"><span class="glyphicon glyphicon-remove"></span></button>
                                 </th>
                             </tr>
                         </tbody>
@@ -140,6 +153,7 @@
     <script src="./lib/jquery/dist/jquery.min.js"></script>
     <script src="./lib/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="./lib/angular/angular.min.js"></script>
+    <script src="./lib/angular-toastr/dist/angular-toastr.tpls.min.js"></script>
 
     <script type="text/javascript" src="app.js"></script>
     <script type="text/javascript" src="controllers/usuario.controller.js"></script>
