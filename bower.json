@@ -22,6 +22,8 @@
   ],
   "dependencies": {
     "angular": "^1.5.8",
-    "angular-toastr": "^2.1.1"
+    "angular-toastr": "^2.1.1",
+    "angular-smart-table": "^2.1.8",
+    "angular-ui-bootstrap": "ui-bootstrap#^2.1.2"
   }
 }

@@ -7,6 +7,7 @@ function UsuarioController(toastr) {
     vm.perfis = ["Administrador", "Padrão"];
     vm.perfilInicial = vm.perfis[1];
     vm.required = true;
+
     vm.usuarios = [{
         id: 0,
         dataRegistro: new Date("2015-03-24"),
@@ -25,7 +26,6 @@ function UsuarioController(toastr) {
         telefone: "(77) 99165-3296"
     }];
 
-
     let id = 1;
     vm.cadastrar = cadastrar;
 
@@ -33,9 +33,9 @@ function UsuarioController(toastr) {
         usuario.id = ++id;
         usuario.perfil = vm.perfilInicial;
         usuario.status = 'Pendente';
-        vm.usuarios.push(angular.copy(usuario));
+        vm.usuarios.push(usuario);
         toastr.success('Usuário salvo com sucesso com sucesso', 'Sucesso');
-        vm.usuario = {};
+        vm.form = {};
     };
 
     vm.save = save;
