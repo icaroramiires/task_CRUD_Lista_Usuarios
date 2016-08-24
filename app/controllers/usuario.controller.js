@@ -7,7 +7,6 @@ function UsuarioController(toastr) {
     vm.perfis = ["Administrador", "Padrão"];
     vm.perfilInicial = vm.perfis[1];
     vm.required = true;
-
     vm.usuarios = [{
         id: 0,
         dataRegistro: new Date("2015-03-24"),
@@ -42,28 +41,26 @@ function UsuarioController(toastr) {
     vm.save = save;
 
     function save(usuario) {
-        if (usuario.id == undefined) {
+        if (usuario.id === undefined) {
             cadastrar(usuario);
         } else {
             alterar(usuario);
         }
+        vm.form = {};
     };
 
     vm.alterar = alterar;
 
     function alterar(usuario) {
-        vm.usuarios.filter(function(item) {
-            if (usuario.id === item.id) {
-                item = angular.copy(usuario);
-                toastr.success('Usuário atualizado com sucesso', 'Sucesso');
+        let usuarios = vm.usuarios.map((item, id) => {
+            if (id === usuario.id) {
+                delete(usuario);
+                return usuario;
             }
+            return item;
         });
-    };
-
-    vm.listar = listar;
-
-    function listar() {
-        return vm.usuarios;
+        vm.usuarios = usuarios;
+        toastr.success('Usuário atualizado com sucesso', 'Sucesso');
     };
 
     vm.deletar = deletar;
@@ -73,4 +70,10 @@ function UsuarioController(toastr) {
         vm.usuarios.splice(index, 1);
         toastr.success('Usuário removido com sucesso', 'Sucesso');
     };
+
+    vm.carregar = carregar;
+
+    function carregar(usuario) {
+        vm.form = angular.copy(usuario);
+    }
 };
