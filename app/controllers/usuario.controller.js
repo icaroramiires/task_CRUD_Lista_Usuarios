@@ -5,7 +5,7 @@ angular
     function UsuarioController(toastr) {
         let vm = this;
         vm.perfis = ["Administrador", "Padrão"];
-        vm.usuario = {};
+        vm.perfilInicial = vm.perfis[1];
 
         vm.usuarios = [{
             id: 0,
@@ -22,10 +22,12 @@ angular
         vm.alterar = alterar;
         vm.listar = listar;
         vm.deletar = deletar;
+        vm.carregarUsuario = carregarUsuario;
 
         let id = 0;
         function cadastrar(usuario) {
             usuario.id = ++id;
+            usuario.perfil = vm.perfilInicial;
             usuario.status = 'Pendente';
             vm.usuarios.push(angular.copy(usuario));
             toastr.success('Usuário salvo com sucesso com sucesso', 'Sucesso');
