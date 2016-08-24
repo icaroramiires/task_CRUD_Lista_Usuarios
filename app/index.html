@@ -37,21 +37,21 @@
                                     </select>
                                 </div>
                                 <label class="text-center col-md-10 col-md-offset-1">Nome Completo</label>
-                                <input class="col-md-10 col-md-offset-1" data-ng-required="required" type="text" data-ng-value="Usuario.usuario.nome" data-ng-model="Usuario.usuario.nome">
+                                <input class="col-md-10 col-md-offset-1" data-ng-required="required" type="text"  data-ng-model="Usuario.usuario.nome">
                                 <label class="text-center col-md-10 col-md-offset-1">Email</label>
-                                <input class="col-md-10 col-md-offset-1" data-ng-required="required" type="email" name="email" data-ng-value="Usuario.usuario.email" data-ng-model="Usuario.usuario.email">
+                                <input class="col-md-10 col-md-offset-1" data-ng-required="required" type="email" name="email" data-ng-model="Usuario.usuario.email">
 
                                 <div class="col-md-6">
                                     <label class=" text-center col-md-10 col-md-offset-1">Data</label>
-                                    <input class="col-md-8 col-md-offset-2" data-ng-required="required" type="date" placeholder="dd/mm/aaaa" data-ng-value="Usuario.usuario.dataRegistro" name="data" data-ng-model="Usuario.usuario.dataRegistro">
+                                    <input class="col-md-8 col-md-offset-2" data-ng-required="required" type="date" placeholder="dd/mm/aaaa" name="data" data-ng-model="Usuario.usuario.dataRegistro">
                                 </div>
                                 <div class="col-md-6">
                                     <label class="text-center col-md-10 col-md-offset-1">Celular</label>
-                                    <input class="col-md-8 col-md-offset-2" data-ng-required="required" type="tel" placeholder="(00) 00000-0000" name="celular" data-ng-value="Usuario.usuario.telefone" data-ng-model="Usuario.usuario.telefone">
+                                    <input class="col-md-8 col-md-offset-2" data-ng-required="required" type="tel" placeholder="(00) 00000-0000" name="celular" data-ng-model="Usuario.usuario.telefone">
                                 </div>
                                 <div class="col-md-4">
                                     <label class="text-center col-md-10 col-md-offset-2">Perfil de Acesso</label>
-                                    <select data-ng-value="Usuario.usuario.perfil" data-ng-required="required" data-ng-model="Usuario.usuario.perfil" data-ng-options="perfil for perfil in Usuario.perfis" class="form-control col-md-10 col-md-offset-3">
+                                    <select data-ng-required="required" data-ng-model="Usuario.usuario.perfil" data-ng-options="perfil for perfil in Usuario.perfis" class="form-control col-md-10 col-md-offset-3">
                                         <!-- ng-options -->
                                     </select>
                                 </div>

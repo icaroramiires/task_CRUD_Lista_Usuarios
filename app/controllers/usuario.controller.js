@@ -40,6 +40,10 @@ angular
             }
         };
 
+        function carregarUsuario(usuario) {
+            vm.usuario = angular.copy(usuario);
+        };
+
         function alterar(usuario) {
             vm.usuarios.filter(function(item){
                 if(usuario.id === item.id) {
