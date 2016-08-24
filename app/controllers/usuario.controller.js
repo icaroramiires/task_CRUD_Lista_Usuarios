@@ -6,6 +6,7 @@ function UsuarioController(toastr) {
     let vm = this;
     vm.perfis = ["Administrador", "Padrão"];
     vm.perfilInicial = vm.perfis[1];
+    vm.required = true;
 
     vm.usuarios = [{
         id: 0,
@@ -15,10 +16,18 @@ function UsuarioController(toastr) {
         perfil: "Administrador",
         status: "Ativo",
         telefone: "(83) 98827-2291"
+    }, {
+        id: 1,
+        dataRegistro: new Date("2015-03-24"),
+        nome: "Ícaro Ramires",
+        email: "icarobsi@hotmail.com",
+        perfil: "Padrão",
+        status: "Pendente",
+        telefone: "(77) 99165-3296"
     }];
 
 
-    let id = 0;
+    let id = 1;
     vm.cadastrar = cadastrar;
 
     function cadastrar(usuario) {
