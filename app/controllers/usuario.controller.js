@@ -3,10 +3,19 @@ angular
     .controller('UsuarioController', UsuarioController);
 
 function UsuarioController(toastr) {
+
     let vm = this;
     vm.perfis = ["Administrador", "Padrão"];
-    vm.perfilInicial = vm.perfis[1];
+    vm.form = {};
+    vm.form.perfil = vm.perfis[1];
     vm.required = true;
+
+    vm.calendario = {
+        opened: false,
+        abrirCalendario: function() {
+            vm.calendario.opened = true;
+        }
+    };
 
     vm.usuarios = [{
         id: 0,
@@ -31,7 +40,6 @@ function UsuarioController(toastr) {
 
     function cadastrar(usuario) {
         usuario.id = ++id;
-        usuario.perfil = vm.perfilInicial;
         usuario.status = 'Pendente';
         vm.usuarios.push(usuario);
         toastr.success('Usuário salvo com sucesso com sucesso', 'Sucesso');
@@ -75,5 +83,5 @@ function UsuarioController(toastr) {
 
     function carregar(usuario) {
         vm.form = angular.copy(usuario);
-    }
+    };
 };

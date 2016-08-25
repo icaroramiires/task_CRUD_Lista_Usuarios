@@ -21,7 +21,7 @@
                         <h4 class="modal-title" id="">Novo Usuário</h4>
                     </div>
                     <div class="modal-body">
-                        <form name="formCadastro">
+                        <form name="formCadastro" novalidate>
                             <div class="row">
                                 <div class="radio col-md-10 col-md-offset-1">
                                     inportar dados de um funcionário cadastrado:
@@ -46,7 +46,14 @@
 
                                     <div class="col-md-6">
                                         <label class=" text-center col-md-10 col-md-offset-1">Data</label>
-                                        <input class="col-md-8 col-md-offset-2" data-ng-required="required" data-ng-disabled="Usuario.edit" type="date" placeholder="dd/mm/aaaa" name="data" data-ng-model="Usuario.form.dataRegistro">
+                                        <p class="input-group">
+                                            <input type="date" class="form-control" uib-datepicker-popup="{{format}}" data-ng-required="true" placeholder="dd/mm/aaaa" data-ng-disabled="Usuario.edit" data-ng-model="Usuario.form.dataRegistro" is-open="Usuario.calendario.opened" close-text="Close"/>
+                                            <span class="input-group-btn">
+                                                <button type="button" class="btn btn-default" ng-click="Usuario.calendario.abrirCalendario()">
+                                                    <i class="glyphicon glyphicon-calendar"></i>
+                                                </button>
+                                            </span>
+                                        </p>
                                     </div>
                                     <div class="col-md-6">
                                         <label class="text-center col-md-10 col-md-offset-1">Celular</label>
@@ -54,7 +61,7 @@
                                     </div>
                                     <div class="col-md-4">
                                         <label class="text-center col-md-10 col-md-offset-2">Perfil de Acesso</label>
-                                        <select data-ng-required="required" data-ng-model="Usuario.perfilInicial" data-ng-options="perfil for perfil in Usuario.perfis" class="form-control col-md-10 col-md-offset-3">
+                                        <select data-ng-required="required" data-ng-model="Usuario.form.perfil" data-ng-options="perfil for perfil in Usuario.perfis" class="form-control col-md-10 col-md-offset-3">
                                             <!-- ng-options -->
                                         </select>
                                     </div>
@@ -111,55 +118,58 @@
         <div class="container">
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <table st-table="usuarios" st-safe-src="Usuario.usuarios" class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>Data do Cadastro</th>
-                                <th>Nome Completo</th>
-                                <th>E-mail</th>
-                                <th>Perfil</th>
-                                <th>Status</th>
-                                <th>Contato</th>
-                                <th>#</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr ng-repeat="usuario in usuarios | filter: buscarUsuario">
-                                <td>{{ usuario.dataRegistro | date:'dd/MM/yyyy' }}</td>
-                                <td>{{ usuario.nome }}</td>
-                                <td>{{ usuario.email }}</td>
-                                <td>{{ usuario.perfil }}</td>
-                                <td>{{ usuario.status }}</td>
-                                <td>{{ usuario.telefone }}</td>
-                                <td>
-                                    <button data-ng-click="Usuario.edit = true" type="button" class="btn   btn-default navbar-btn" data-toggle="modal" data-target="#modalUsuario">
-                                        <span class="glyphicon glyphicon-pencil"></span>
-                                    </button>
-                                    <button type="button" class="btn   btn-danger navbar-btn" data-toggle="modal" data-target="#modalDelete">
-                                        <span class="glyphicon glyphicon-remove"></span>
-                                    </button>
-                                </td>
-                            </tr>
-                        </tbody>
-                        <tfoot class="pull-right">
-                            <tr>
-                                <td colspan="5" class="text-center">
-                                    <div st-pagination="" st-items-by-page="5" st-displayed-pages="8"></div>
-                                </td>
-                            </tr>
-                        </tfoot>
+                    <div class="row">
+                        <table st-table="usuarios" st-safe-src="Usuario.usuarios" class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Data do Cadastro</th>
+                                    <th>Nome Completo</th>
+                                    <th>E-mail</th>
+                                    <th>Perfil</th>
+                                    <th>Status</th>
+                                    <th>Contato</th>
+                                    <th>#</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="usuario in usuarios | filter: buscarUsuario">
+                                    <td>{{ usuario.dataRegistro | date:'dd/MM/yyyy' }}</td>
+                                    <td>{{ usuario.nome }}</td>
+                                    <td>{{ usuario.email }}</td>
+                                    <td>{{ usuario.perfil }}</td>
+                                    <td>{{ usuario.status }}</td>
+                                    <td>{{ usuario.telefone }}</td>
+                                    <td>
+                                        <button data-ng-click="Usuario.edit = true" type="button" class="btn   btn-default navbar-btn" data-toggle="modal" data-target="#modalUsuario">
+                                            <span class="glyphicon glyphicon-pencil"></span>
+                                        </button>
+                                        <button type="button" class="btn   btn-danger navbar-btn" data-toggle="modal" data-target="#modalDelete">
+                                            <span class="glyphicon glyphicon-remove"></span>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tfoot class="pull-right">
+                                <tr>
+                                    <td colspan="5" class="text-center">
+                                        <div st-pagination="" st-items-by-page="5" st-displayed-pages="8"></div>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </section>
-        <script src="./lib/jquery/dist/jquery.min.js"></script>
-        <script src="./lib/bootstrap/dist/js/bootstrap.min.js"></script>
-        <script src="./lib/angular/angular.min.js"></script>
-        <script src="./lib/angular-toastr/dist/angular-toastr.tpls.min.js"></script>
-        <script src="./lib/angular-smart-table/dist/smart-table.min.js"></script>
+            </section>
+            <script src="./lib/jquery/dist/jquery.min.js"></script>
+            <script src="./lib/bootstrap/dist/js/bootstrap.min.js"></script>
+            <script src="./lib/angular/angular.min.js"></script>
+            <script src="./lib/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+            <script src="./lib/angular-animate/angular-animate.min.js"></script>
+            <script src="./lib/angular-toastr/dist/angular-toastr.tpls.min.js"></script>
+            <script src="./lib/angular-smart-table/dist/smart-table.min.js"></script>
 
-        <script type="text/javascript" src="app.js"></script>
-        <script type="text/javascript" src="controllers/usuario.controller.js"></script>
-    </body>
+            <script type="text/javascript" src="app.js"></script>
+            <script type="text/javascript" src="controllers/usuario.controller.js"></script>
+        </body>
 
-</html>
+    </html>
